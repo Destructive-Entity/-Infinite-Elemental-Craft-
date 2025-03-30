@@ -1,6 +1,6 @@
 # Infinite Elemental Craft Enhanced - A Creative Combination Game
 
-You can play in your browser at: [https://destructive-entity.github.io/-Infinite-Elemental-Craft-/]
+**You can play in your browser at: [https://destructive-entity.github.io/-Infinite-Elemental-Craft-/]**
 
 This project is a web-based game where players start with fundamental elements (Water, Fire, Earth, Air) and combine them through drag-and-drop actions to discover a vast, potentially infinite number of new items and concepts.
 
