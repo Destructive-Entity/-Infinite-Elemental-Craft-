@@ -21,4 +21,4 @@ The game includes:
 *   All code completely written by **destructive-entity (github)**.
 *   JS enhancements by **destructive-entity (github)**.
 
-*   /This project is free to use and modify as long as the [LICENSE](LICENSE) is included./
+  *This project is free to use and modify as long as the [LICENSE](LICENSE) is included.*
