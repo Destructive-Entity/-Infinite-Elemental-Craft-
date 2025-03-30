@@ -1,0 +1,329 @@
+/* --- Global & Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* Define color variables for easier theming */
+    --bg-color: #f8f9fa; /* Lighter background */
+    --container-bg: #ffffff;
+    --workspace-bg-start: #eef2f7;
+    --workspace-bg-end: #dde4ed;
+    --element-bg: #e9ecef;
+    --element-bg-hover: #dee2e6;
+    --element-bg-active: #ced4da;
+    --text-color: #212529; /* Darker text */
+    --text-muted: #6c757d; /* Muted text */
+    --border-color: #dee2e6;
+    --border-color-light: #f1f3f5;
+    --accent-color: #4a90e2; /* A nice blue */
+    --accent-color-dark: #3a7bc8;
+    --danger-color: #e74c3c;
+    --danger-color-dark: #c0392b;
+    --success-color: #2ecc71;
+    --success-color-dark: #27ae60;
+    --shadow-color-light: rgba(0, 0, 0, 0.05);
+    --shadow-color-medium: rgba(0, 0, 0, 0.1);
+
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px; /* For pill shape */
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    line-height: 1.6;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px; /* Base font size */
+}
+
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: var(--accent-color);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* --- Main Layout --- */
+.container {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    gap: 20px; /* Slightly more space */
+    max-width: 1500px; /* Slightly wider max */
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* --- Palette Area --- */
+#palette-container {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 320px; /* Slightly wider */
+    flex-shrink: 0;
+    background-color: var(--container-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--shadow-color-light);
+    height: calc(100vh - 140px); /* Adjust height based on h1/footer/padding */
+    max-height: 85vh;
+    transition: box-shadow 0.3s ease;
+}
+#palette-container:hover {
+    box-shadow: 0 6px 16px var(--shadow-color-medium);
+}
+
+
+#palette-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.25em; /* Slightly larger */
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+#search-bar {
+    width: 100%;
+    padding: 10px 12px; /* More padding */
+    margin-bottom: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+    font-size: 0.95em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#search-bar:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Focus ring */
+}
+
+#palette {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px 5px; /* Padding inside */
+    margin-bottom: 15px;
+    background-color: var(--bg-color); /* Match body background for inset look */
+    border: 1px solid var(--border-color-light);
+    border-radius: var(--border-radius-sm);
+    /* Custom Scrollbar (Webkit) */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--border-color) var(--bg-color); /* Firefox */
+}
+#palette::-webkit-scrollbar {
+    width: 8px;
+}
+#palette::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 4px;
+}
+#palette::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    border-radius: 4px;
+    border: 2px solid var(--bg-color); /* Creates padding around thumb */
+}
+#palette::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-muted);
+}
+
+
+.info-area {
+    padding: 12px 5px 5px 5px;
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--text-muted);
+    border-top: 1px solid var(--border-color-light);
+    flex-shrink: 0;
+}
+
+#element-count {
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+#reset-button {
+    margin-left: 15px;
+    padding: 6px 12px; /* More balanced padding */
+    font-size: 0.85em;
+    font-weight: 500;
+    cursor: pointer;
+    background-color: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+#reset-button:hover {
+    background-color: var(--danger-color-dark);
+}
+#reset-button:active {
+    transform: scale(0.98); /* Click effect */
+}
+
+/* --- Workspace Area --- */
+#workspace {
+    flex-grow: 1;
+    background-image: linear-gradient(to bottom right, var(--workspace-bg-start), var(--workspace-bg-end));
+    border: 1px solid var(--border-color); /* Subtle border */
+    border-radius: var(--border-radius-md);
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.06); /* Subtle inset shadow */
+    min-height: 400px;
+    height: calc(100vh - 140px); /* Match palette container height */
+    max-height: 85vh;
+}
+
+.workspace-placeholder {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-muted);
+    font-size: 1.1em;
+    font-style: normal; /* Less jarring than italic */
+    text-align: center;
+    pointer-events: none;
+    user-select: none;
+}
+
+/* --- Element Styling (Shared & Specific) --- */
+.element {
+    display: inline-flex; /* Use flex for better alignment */
+    align-items: center; /* Vertically align emoji and text */
+    background-color: var(--element-bg);
+    border: 1px solid transparent; /* Start with transparent border */
+    padding: 5px 12px; /* Adjusted padding */
+    margin: 5px;
+    border-radius: var(--border-radius-lg); /* Pill shape */
+    cursor: grab;
+    font-size: 0.9em;
+    font-weight: 500; /* Slightly bolder text */
+    color: var(--text-color);
+    user-select: none;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px var(--shadow-color-light);
+    transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.15s ease-out;
+}
+.element span { /* Style emoji specifically if needed */
+    margin-right: 5px;
+    font-size: 1.1em; /* Make emoji slightly larger */
+}
+
+.element:hover {
+    border-color: var(--element-bg-active);
+    background-color: var(--element-bg-hover);
+    box-shadow: 0 2px 5px var(--shadow-color-medium);
+    transform: translateY(-1px); /* Slight lift on hover */
+}
+
+.element:active {
+    cursor: grabbing;
+    background-color: var(--element-bg-active);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1); /* Inset shadow when pressed */
+    transform: scale(0.98); /* Press down effect */
+}
+
+/* Workspace elements get position:absolute from JS */
+#workspace .element {
+    position: absolute;
+    z-index: 10;
+    background-color: var(--container-bg); /* White background for workspace elements */
+    box-shadow: 0 3px 8px var(--shadow-color-medium); /* More prominent shadow */
+}
+#workspace .element:hover {
+     box-shadow: 0 5px 12px var(--shadow-color-medium);
+     transform: translateY(-1px) scale(1.02); /* Lift and slightly enlarge */
+}
+
+
+/* --- Dragging State --- */
+.element.dragging {
+    opacity: 0.85; /* Less transparent */
+    transform: scale(1.08); /* Slightly larger when dragging */
+    box-shadow: 0 6px 15px var(--shadow-color-medium); /* Lifted shadow */
+    cursor: grabbing;
+    z-index: 100;
+    border-color: var(--accent-color); /* Highlight border */
+    background-color: var(--container-bg); /* Keep background bright */
+}
+
+/* --- Tooltip Indication --- */
+.element[title] {
+    cursor: help;
+}
+
+/* --- Message Area Styling --- */
+#message-area {
+    position: fixed;
+    bottom: 25px; /* Raise slightly */
+    left: 50%;
+    transform: translate(-50%, 10px); /* Start slightly lower for slide-up */
+    padding: 12px 25px;
+    background-color: rgba(33, 37, 41, 0.9); /* Darker, less transparent */
+    color: white;
+    border-radius: var(--border-radius-md); /* Consistent radius */
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0s linear 0.3s, background-color 0.3s ease;
+    text-align: center;
+    min-width: 240px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 0.95em;
+    font-weight: 500;
+}
+
+#message-area.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%); /* Slide up to final position */
+    transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+}
+
+#message-area.error {
+    background-color: rgba(231, 76, 60, 0.95); /* Danger color, slightly more opaque */
+}
+
+#message-area.discovery {
+    background-color: rgba(46, 204, 113, 0.95); /* Success color, slightly more opaque */
+    font-weight: 600; /* Bolder for discovery */
+}
+#message-area.discovery::before {
+     content: "🎉 "; /* Add a party popper */
+}
+#message-area.error::before {
+    content: "⚠️ "; /* Warning sign */
+}
+
+
+/* --- Shake Animation --- */
+.element.shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both; /* Smoother shake */
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+/* --- Footer --- */
+footer#attribution {
+    text-align: center;
+    margin-top: auto; /* Push footer to bottom if content is short */
+    padding: 15px;
+    font-size: 0.85em;
+    color: var(--text-muted);
+    width: 100%;
+    background-color: var(--bg-color); /* Match body background */
+    border-top: 1px solid var(--border-color-light);
+}

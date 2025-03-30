@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Infinite Elemental Craft</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>✨ Infinite Elemental Craft ✨</h1>
+
+    <div class="container">
+        <div id="palette-container">
+             <h2>Controls & Discoveries</h2>
+             <!-- Add Search Bar -->
+             <input type="text" id="search-bar" placeholder="Search discovered elements...">
+
+             <!-- Palette for Discovered Elements -->
+             <div id="palette">
+                 <!-- JS populates this, starting H2 is removed by renderPalette -->
+                 <h2>Discovered Elements</h2>
+             </div>
+
+             <!-- Info Area: Count and Reset -->
+             <div class="info-area">
+                 Discovered: <span id="element-count">0</span>
+                 <button id="reset-button" title="Reset all progress">Reset</button>
+            </div>
+        </div>
+
+        <div id="workspace">
+            <!-- Elements are dragged/created here by JS -->
+            <p class="workspace-placeholder">Drag elements here or combine elements from the palette!</p>
+        </div>
+    </div>
+
+    <!-- Message Area (for status, errors, discoveries) -->
+    <div id="message-area" class="message"></div>
+
+    <!-- Attribution Footer -->
+    <footer id="attribution">
+        <!-- JS will populate this -->
+    </footer>
+
+    <!-- Script at the end of body -->
+    <script src="script.js"></script>
+</body>
+</html>
